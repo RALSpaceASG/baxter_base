@@ -1,0 +1,12 @@
+<launch>
+	<!-- This launch file is for viewing and testing the surveyor URDF without the need to run any other nodes. -->
+
+	<arg name="use_gui" default="false" doc="show sliders for controlling joint positions" />
+	<param name="use_gui" value="$(arg use_gui)" /> <!-- set the parameter to tell joint_state_publisher to show sliders -->
+
+	<include file="$(find baxter_base)/launch/description.launch" />
+
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find baxter_base)/urdf.rviz" required="true" />
+</launch>

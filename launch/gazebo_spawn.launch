@@ -1,0 +1,11 @@
+<launch>
+	<include file="$(find baxter_base)/launch/description.launch" />
+
+	<arg name="sdf" default="$(find baxter_base)/sdf/baxter_base/model.sdf" />
+
+	<!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+	<node name="spawn_baxter_base_model" pkg="gazebo_ros" type="spawn_model" args="-sdf -model baxter_base -file $(arg sdf) -z 5"/>
+
+	<!-- launch the controllers after the model has loaded -->
+	<include file="$(find baxter_base)/launch/control.launch" />
+</launch>

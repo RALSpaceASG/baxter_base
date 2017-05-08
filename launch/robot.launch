@@ -1,0 +1,13 @@
+<launch>
+	<!-- load the hardware configuration -->
+	<rosparam file="$(find baxter_base)/config/hardware.yaml" command="load" />
+
+	<!-- start the hardware node -->
+	<node name="baxter_base_hardware" pkg="jrk_hardware" type="jrk_hardware_node"/>
+
+	<!-- load the controller -->
+	<include file="$(find baxter_base)/launch/control.launch" />
+
+	<!-- enable teleop -->
+	<include file="$(find baxter_base)/launch/teleop.launch" />
+</launch>

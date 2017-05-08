@@ -1,0 +1,10 @@
+#baxter_base:
+  baxter_base_hardware:
+    joints:
+      front_left_wheel_joint   : /dev/serial/by-id/usb-FTDI_TTL232R_FTGA2J2M-if00-port0
+      front_right_wheel_joint  : /dev/serial/by-id/usb-FTDI_TTL232R_FTAK07RR-if00-port0
+      rear_right_wheel_joint   : /dev/serial/by-id/usb-FTDI_TTL232R_FTAJW5SD-if00-port0
+      rear_left_wheel_joint    : /dev/serial/by-id/usb-FTDI_TTL232R_FTAJWTLE-if00-port0
+
+#mavros:
+  fcu_url : /dev/serial/by-id/usb-3D_Robotics_PX4Flow_v1.3_000000000000-if00
