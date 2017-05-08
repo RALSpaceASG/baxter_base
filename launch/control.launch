@@ -5,9 +5,9 @@
 	<!-- load the controllers -->
 	<node name="controller_spawner" pkg="controller_manager" type="spawner" args="baxter_base_controller joint_state_controller --shutdown-timeout 3" />
 
-  <node pkg="twist_mux" type="twist_mux" name="twist_mux">
-    <rosparam command="load" file="$(find baxter_base)/config/twist_mux.yaml" />
-    <remap from="cmd_vel_out" to="baxter_base_controller/cmd_vel"/>
-  </node>
+	<node pkg="twist_mux" type="twist_mux" name="twist_mux">
+		<rosparam command="load" file="$(find baxter_base)/config/twist_mux.yaml" />
+		<remap from="cmd_vel_out" to="baxter_base_controller/cmd_vel"/>
+	</node>
 
 </launch>

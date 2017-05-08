@@ -1,4 +1,4 @@
-# rimmer:
+# baxter_base:
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController
@@ -12,14 +12,6 @@
   wheel_fr_velocity_controller:
     type: velocity_controllers/JointVelocityController
     joint: front_right_wheel_joint
-    pid: {p: 100.0, i: 0.01, d: 10.0}
-  wheel_ml_velocity_controller:
-    type: velocity_controllers/JointVelocityController
-    joint: mid_left_wheel_joint
-    pid: {p: 100.0, i: 0.01, d: 10.0}
-  wheel_mr_velocity_controller:
-    type: velocity_controllers/JointVelocityController
-    joint: mid_right_wheel_joint
     pid: {p: 100.0, i: 0.01, d: 10.0}
   wheel_bl_velocity_controller:
     type: velocity_controllers/JointVelocityController
