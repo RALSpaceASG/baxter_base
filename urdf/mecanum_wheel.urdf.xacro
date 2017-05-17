@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="mecanum_wheel" xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:macro name="mecanum_wheel" params="parent_link wheel_prefix wheel_handedness reflect *joint_pose">
+		<link name="${wheel_prefix}_mecanum_wheel_link">
+			<inertial>
+				<!-- from measurement -->
+				<mass value="3.564" />
+				<!-- from Solid Edge model 10IN45D12FLZ-00.asm -->
+				<origin xyz="0 0.106 0" />
+				<inertia ixx="0.021" iyy="0.036" izz="0.021" ixy="0.000" ixz="0.000" iyz="0.000" />
+			</inertial>
+			<visual>
+				<xacro:if value="${reflect == -1}">
+					<origin rpy="${M_PI} 0 0" />
+				</xacro:if>
+				<geometry>
+					<mesh filename="package://baxter_base/meshes/wheel_${wheel_handedness}.dae" />
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 ${reflect*wheel_length/2} 0" rpy="${M_PI/2} 0 0" />
+				<geometry>
+					<cylinder radius="${wheel_radius}" length="${wheel_length}" />
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="${wheel_prefix}_mecanum_wheel" type="continuous">
+			<parent link="${parent_link}" />
+			<child link="${wheel_prefix}_mecanum_wheel_link" />
+			<xacro:insert_block name="joint_pose" />
+			<axis xyz="0 1 0" rpy="0 0 0" />
+		</joint>
+	</xacro:macro>
+</robot>

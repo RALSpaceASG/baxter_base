@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot name="baxter_base_pedestal" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<xacro:macro name="baxter_base_pedestal_link">
+		<link name="pedestal_link">
+			<inertial>
+				<!-- From Solid Edge assembly "Pedestal.asm" -->
+				<mass value="20.375" />
+				<origin xyz="0 0 0.178" />
+				<inertia ixx="0.973" iyy="1.006" izz="0.193" ixy="0.000" ixz="-0.009" iyz="-0.004" />
+			</inertial>
+			<visual>
+				<geometry>
+					<mesh filename="package://baxter_base/meshes/pedestal.dae" />
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 ${pedestal_height/2}" />
+				<geometry>
+					<box size="0.242 0.198 ${pedestal_height}" />
+				</geometry>
+			</collision>
+			<collision>
+				<origin xyz="0 0 ${pedestal_height + pedestal_plate_thickness/2}" />
+				<geometry>
+					<cylinder radius="${pedestal_plate_radius}" length="${pedestal_plate_thickness}" />
+				</geometry>
+			</collision>
+		</link>
+	</xacro:macro>
+</robot>

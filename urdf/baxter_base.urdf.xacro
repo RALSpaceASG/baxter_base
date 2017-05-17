@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot name="baxter_base_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find baxter_base)/urdf/pedestal.urdf.xacro" />
+	<xacro:include filename="$(find baxter_base)/urdf/mecanum_wheel.urdf.xacro" />
+
+	<property name="M_PI" value="3.14159"/>
+
+	<xacro:property name="frame_width" value="0.468" />
+	<xacro:property name="frame_length" value="0.640" />
+
+	<xacro:property name="wheel_horizontal_offset" value="0.0475" />
+	<xacro:property name="wheel_vertical_offset" value="0.076" />
+	<xacro:property name="wheel_radius" value="${0.253/2}" />
+	<xacro:property name="wheel_length" value="0.108" />
+
+	<xacro:property name="pedestal_height" value="0.340" />
+	<xacro:property name="pedestal_plate_thickness" value="0.010" />
+	<xacro:property name="pedestal_plate_radius" value="${0.370/2}" />
+
+	<xacro:macro name="baxter_base">
+		<link name="frame_link">
+			<inertial>
+				<!-- From Solid Edge assembly "Frame.asm" -->
+				<mass value="17.439" />
+				<origin xyz="0 0 0.0578" />
+				<inertia ixx="0.623" iyy="0.937" izz="1.281" ixy="-0.006" ixz="0.003" iyz="0.005" />
+			</inertial>
+			<visual>
+				<geometry>
+					<mesh filename="package://baxter_base/meshes/base.dae" />
+				</geometry>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0.0675" />
+				<geometry>
+					<box size="0.640 0.470 0.175" />
+				</geometry>
+			</collision>
+		</link>
+
+		<link name="base_footprint" />
+
+		<joint name="base_footprint_joint" type="fixed">
+			<origin xyz="0 0 ${wheel_vertical_offset - wheel_radius}" />
+			<parent link="frame_link" />
+			<child link="base_footprint" />
+		</joint>
+
+		<xacro:baxter_base_pedestal_link />
+
+		<joint name="pedestal_joint" type="fixed">
+			<parent link="pedestal_link" />
+			<child link="frame_link" />
+		</joint>
+
+		<xacro:mecanum_wheel parent_link="frame_link" wheel_prefix="front_left" reflect="1" wheel_handedness="left">
+			<origin xyz="${frame_length/2 - wheel_horizontal_offset} ${frame_width/2} ${wheel_vertical_offset}" />
+		</xacro:mecanum_wheel>
+		<xacro:mecanum_wheel parent_link="frame_link" wheel_prefix="front_right" reflect="-1" wheel_handedness="right">
+			<origin xyz="${frame_length/2 - wheel_horizontal_offset} -${frame_width/2} ${wheel_vertical_offset}" />
+		</xacro:mecanum_wheel>
+		<xacro:mecanum_wheel parent_link="frame_link" wheel_prefix="rear_left" reflect="1" wheel_handedness="right">
+			<origin xyz="-${frame_length/2 - wheel_horizontal_offset} ${frame_width/2} ${wheel_vertical_offset}" />
+		</xacro:mecanum_wheel>
+		<xacro:mecanum_wheel parent_link="frame_link" wheel_prefix="rear_right" reflect="-1" wheel_handedness="left">
+			<origin xyz="-${frame_length/2 - wheel_horizontal_offset} -${frame_width/2} ${wheel_vertical_offset}" />
+		</xacro:mecanum_wheel>
+	</xacro:macro>
+</robot>
