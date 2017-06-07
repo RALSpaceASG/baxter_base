@@ -26,6 +26,7 @@
   <run_depend>ros_controllers</run_depend>
   <run_depend>controller_manager</run_depend>
   <run_depend>gazebo_ros</run_depend>
+  <run_depend>jrk_hardware</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
