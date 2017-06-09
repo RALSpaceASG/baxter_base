@@ -3,16 +3,7 @@
 	<rosparam file="$(find baxter_base)/config/control.yaml" command="load" />
 
 	<!-- load the controllers -->
-	<!--
-	<node name="controller_spawner" pkg="controller_manager" type="spawner" args="baxter_base_controller joint_state_controller --shutdown-timeout 3" />
-
-	<node pkg="twist_mux" type="twist_mux" name="twist_mux">
-		<rosparam command="load" file="$(find baxter_base)/config/twist_mux.yaml" />
-		<remap from="cmd_vel_out" to="baxter_base_controller/cmd_vel"/>
-	</node>
-	-->
-	
 	<node name="controller_spawner" pkg="controller_manager" type="spawner"
-		args="joint_state_controller front_left_wheel_joint front_right_wheel_joint rear_left_wheel_joint rear_right_wheel_joint" />
+		args="joint_state_controller baxter_base_controller" />
 
 </launch>
